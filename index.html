@@ -1104,8 +1104,9 @@
             </div>
         </div>
     </footer>
-
+    
     <script>
+        
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
@@ -1224,27 +1225,69 @@
             authModal.style.display = 'none';
             document.getElementById('signupForm').reset();
         });
-        
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
+
+         // Initialize EmailJS with your Public Key
+        (function() {
+            emailjs.init("vA1VW5Jea0vW1bKh3"); // Replace with your EmailJS Public Key
+        })();
+
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
             
+            // Get form data
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
-                company: document.getElementById('company').value,
+                company: document.getElementById('company').value,        
                 service: document.getElementById('service').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                to_email: "samikshatechsolutions@gmail.com" // Replace with your business email
             };
+
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const buttonText = document.getElementById('buttonText');
+            const spinner = document.getElementById('spinner');
             
-            // In a real application, you would send this to a server
-            console.log('Contact form submitted:', formData);
+            submitBtn.disabled = true;
+            buttonText.textContent = "Sending...";
+            spinner.classList.remove('d-none');
             
-            // Show success message
-            alert('Thank you for your message! We will contact you within 24 hours.');
-            document.getElementById('contactForm').reset();
+            // Hide previous alerts
+            document.getElementById('successAlert').classList.add('d-none');
+            document.getElementById('errorAlert').classList.add('d-none');
+
+            // Send email using EmailJS
+            emailjs.send(
+                "service_re49gop",     // Replace with your EmailJS Service ID
+                "template_1thmy54",    // Replace with your EmailJS Template ID
+                formData
+            )
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                
+                // Show success message
+                document.getElementById('successAlert').classList.remove('d-none');
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+            })
+            .catch(function(error) {
+                console.log('FAILED...', error);
+                
+                // Show error message
+                document.getElementById('errorAlert').classList.remove('d-none');
+            })
+            .finally(function() {
+                // Reset button state
+                submitBtn.disabled = false;
+                buttonText.textContent = "Submit";
+                spinner.classList.add('d-none');
+            });
         });
-        
+  
+      
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -1294,71 +1337,11 @@
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
-    <script>
-        // Initialize EmailJS with your Public Key
-        (function() {
-            emailjs.init("vA1VW5Jea0vW1bKh3"); // Replace with your EmailJS Public Key
-        })();
-
-        // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                business: document.getElementById('company').value,        
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value,
-                to_email: "samikshatechsolutions@gmail.com" // Replace with your business email
-            };
-
-            // Show loading state
-            const submitBtn = document.getElementById('submitBtn');
-            const buttonText = document.getElementById('buttonText');
-            const spinner = document.getElementById('spinner');
-            
-            submitBtn.disabled = true;
-            buttonText.textContent = "Sending...";
-            spinner.classList.remove('d-none');
-            
-            // Hide previous alerts
-            document.getElementById('successAlert').classList.add('d-none');
-            document.getElementById('errorAlert').classList.add('d-none');
-
-            // Send email using EmailJS
-            emailjs.send(
-                "service_re49gop",     // Replace with your EmailJS Service ID
-                "template_1thmy54",    // Replace with your EmailJS Template ID
-                formData
-            )
-            .then(function(response) {
-                console.log('SUCCESS!', response.status, response.text);
-                
-                // Show success message
-                document.getElementById('successAlert').classList.remove('d-none');
-                
-                // Reset form
-                document.getElementById('contactForm').reset();
-            })
-            .catch(function(error) {
-                console.log('FAILED...', error);
-                
-                // Show error message
-                document.getElementById('errorAlert').classList.remove('d-none');
-            })
-            .finally(function() {
-                // Reset button state
-                submitBtn.disabled = false;
-                buttonText.textContent = "Submit";
-                spinner.classList.add('d-none');
-            });
-        });
-    </script>
+   
 </body>
 
 </html>
+
 
 
 
