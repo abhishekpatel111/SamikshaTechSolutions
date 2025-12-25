@@ -8,6 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="favicon6.png" type="image/png">
+   // sending the mail to company mail address Bootstrap Code
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
         /* Reset & Base Styles */
         * {
@@ -937,22 +943,22 @@
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Full Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="company">Company</label>
-                            <input type="text" id="company" class="form-control" placeholder="Enter your company name">
+                            <input type="text" id="company" name="company" class="form-control" placeholder="Enter your company name">
                         </div>
                         
                         <div class="form-group">
                             <label for="service">Service Interested In</label>
-                            <select id="service" class="form-control">
+                            <select id="service" name="service" class="form-control">
                                 <option value="">Select a service</option>
                                 <option value="infrastructure">IT Infrastructure</option>
                                 <option value="cloud">Cloud Solutions</option>
@@ -963,10 +969,10 @@
                         
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" class="form-control" placeholder="Tell us about your project or requirements"></textarea>
+                            <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project or requirements"></textarea>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -1225,7 +1231,7 @@
             authModal.style.display = 'none';
             document.getElementById('signupForm').reset();
         });
-
+    
          // Initialize EmailJS with your Public Key
         (function() {
             emailjs.init("vA1VW5Jea0vW1bKh3"); // Replace with your EmailJS Public Key
@@ -1329,18 +1335,10 @@
                 }
             });
         });
-    </script>
-    
-    // sending the mail to company mail address Bootstrap Code
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
-   
+    </script>   
 </body>
-
 </html>
+
 
 
 
