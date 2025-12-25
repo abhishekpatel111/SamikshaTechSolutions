@@ -1246,9 +1246,8 @@
         })();
 
         // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
+        document.getElementById('contactForm').addEventListener('submit',(e) => {
+            e.preventDefault();
             // Get form data
             const formData = {
                 name: document.getElementById('name').value,
@@ -1346,6 +1345,7 @@
     </script>   
 </body>
 </html>
+
 
 
 
